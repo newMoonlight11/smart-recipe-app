@@ -44,11 +44,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'users',
-    'recipes',
-    'favorites',
-    'detections',
-    'recommendations',
+    'apps.users',
+    'apps.recipes',
+    'apps.favorites',
+    'apps.detections',
+    'apps.recommendations',
 ]
 
 MIDDLEWARE = [

@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   TouchableOpacity,
   Text,
@@ -7,55 +6,41 @@ import {
   ActivityIndicator,
   ViewStyle,
 } from "react-native";
-
-import {
-  colors,
-  spacing,
-  radius,
-  typography,
-} from "../../themes";
+import { colors, radius, typography } from "../../themes";
 
 interface ButtonProps {
-  title: string;
-  onPress: () => void;
-
-  variant?: "primary" | "secondary" | "outline";
-
-  loading?: boolean;
   disabled?: boolean;
-
+  loading?: boolean;
+  onPress: () => void;
   style?: ViewStyle;
+  title: string;
+  variant?: "primary" | "secondary" | "outline";
 }
 
 export default function Button({
-  title,
-  onPress,
-  variant = "primary",
-  loading = false,
   disabled = false,
+  loading = false,
+  onPress,
   style,
+  title,
+  variant = "primary",
 }: ButtonProps) {
   const getButtonStyle = () => {
     switch (variant) {
       case "secondary":
         return styles.secondaryButton;
-
       case "outline":
         return styles.outlineButton;
-
       default:
         return styles.primaryButton;
     }
   };
-
   const getTextStyle = () => {
     switch (variant) {
       case "secondary":
         return styles.secondaryText;
-
       case "outline":
         return styles.outlineText;
-
       default:
         return styles.primaryText;
     }
@@ -64,8 +49,8 @@ export default function Button({
   return (
     <TouchableOpacity
       activeOpacity={0.85}
-      onPress={onPress}
       disabled={disabled || loading}
+      onPress={onPress}
       style={[
         styles.baseButton,
         getButtonStyle(),
@@ -76,9 +61,7 @@ export default function Button({
       {loading ? (
         <ActivityIndicator color={colors.white} />
       ) : (
-        <Text style={[styles.baseText, getTextStyle()]}>
-          {title}
-        </Text>
+        <Text style={[styles.baseText, getTextStyle()]}>{title}</Text>
       )}
     </TouchableOpacity>
   );
@@ -87,47 +70,35 @@ export default function Button({
 const styles = StyleSheet.create({
   baseButton: {
     height: 56,
-
-    borderRadius: radius.md,
-
+    borderRadius: radius.lg,
     alignItems: "center",
     justifyContent: "center",
-
-    paddingHorizontal: spacing.lg,
   },
-
-  primaryButton: {
-    backgroundColor: colors.primary,
+  baseText: {
+    fontSize: typography.body,
+    fontWeight: "600",
   },
-
-  secondaryButton: {
-    backgroundColor: colors.cream,
+  disabledButton: {
+    opacity: 0.5,
   },
-
   outlineButton: {
     backgroundColor: "transparent",
     borderWidth: 1.5,
     borderColor: colors.primary,
   },
-
-  disabledButton: {
-    opacity: 0.5,
+  outlineText: {
+    color: colors.primary,
   },
-
-  baseText: {
-    fontSize: typography.body,
-    fontWeight: "600",
+  primaryButton: {
+    backgroundColor: colors.primary,
   },
-
   primaryText: {
     color: colors.white,
   },
-
-  secondaryText: {
-    color: colors.primary,
+  secondaryButton: {
+    backgroundColor: colors.primaryDark,
   },
-
-  outlineText: {
-    color: colors.primary,
+  secondaryText: {
+    color: colors.white,
   },
 });
